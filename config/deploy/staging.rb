@@ -25,6 +25,18 @@ set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 set :server_name, 'milkgame.aisensiy.com'
 set :port, 1000
 
+# files which need to be symlinked to other parts of the
+# filesystem. For example nginx virtualhosts, log rotation
+# init scripts etc. The full_app_name variable isn't
+# available at this point so we use a custom template {{}}
+# tag and then add it at run time.
+set(:symlinks, [
+  {
+    source: "nginx.conf",
+    link: "/etc/nginx/sites-enabled/{{full_app_name}}"
+  }
+])
+
 
 # Custom SSH Options
 # ==================
