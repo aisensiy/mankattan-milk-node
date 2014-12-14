@@ -1,0 +1,19 @@
+{
+  "WX_OAUTH_REDIRECT_URL": "http://mankattan.mathartworld.com/app/box.html",
+  "DOMAIN": "mankattan.mathartworld.com",
+  "HTTP_SERVER": true,
+  "PORT": 8003,
+  "HOST": "0.0.0.0",
+
+  "COOKIE_SECRET": "xxxxxxxxxxx",
+  "COOKIE_MAX_AGE": 86400000,
+  "COOKIE_KEY": "connect.sid",
+
+  "DB_HOST": "127.0.0.1",
+  "DB_NAME": "mankattan",
+  "DB_PORT": 27017,
+
+  "WEIXIN_TOKEN": "token",
+  "WEIXIN_APP_ID": "app_id",
+  "WEIXIN_APP_SECRET": "secret"
+}
