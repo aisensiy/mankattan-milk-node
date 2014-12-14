@@ -1,0 +1,8 @@
+namespace :deploy do
+  desc 'Commands for forever control'
+  %w(stop restart start).each do |cmd|
+    task cmd.to_sym, roles(:app) do
+      run "cd #{fetch(:deploy_to)}/current/ && node_modules/.bin/forever start bin/www"
+    end
+  end
+end

@@ -1,0 +1,11 @@
+namespace :npm do
+  desc 'install npm'
+  task :npm_install, roles(:app) do
+    run "cd #{fetch(:deploy_to)}/current/ && npm install"
+  end
+
+  desc 'update npm'
+  task :npm_update, roles(:app) do
+    run "cd #{fetch(:deploy_to)}/current/ && npm update"
+  end
+end
