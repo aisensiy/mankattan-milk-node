@@ -19,6 +19,7 @@ set :app_port, 8004
 
 # Default value for :log_level is :debug
 # set :log_level, :debug
+set :log_level, :info
 
 # Default value for :pty is false
 # set :pty, true
@@ -54,6 +55,8 @@ namespace :deploy do
 
   before 'deploy:start', 'npm:npm_install'
   before 'deploy:restart', 'npm:npm_install'
+  before 'deploy:started', 'deploy:stop'
+  after 'deploy:finished', 'deploy:start'
 
   # desc 'Restart application'
   # task :restart do
