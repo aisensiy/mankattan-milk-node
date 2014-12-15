@@ -52,8 +52,8 @@ set(:executable_config_files, [])
 
 namespace :deploy do
 
-  before 'deploy:start', 'deploy:npm_install'
-  before 'deploy:restart', 'deploy:npm_install'
+  before 'deploy:start', 'npm:npm_install'
+  before 'deploy:restart', 'npm:npm_install'
 
   # desc 'Restart application'
   # task :restart do
