@@ -25,25 +25,27 @@ router.get('/create', function(req, res) {
       }, next);
     },
     function(result, resp, next){
-      var newUser = new User({
+      var user = new User({
         openid: result.openid,
         nickname: result.nickname,
         avatar: result.headimgurl && result.headimgurl.slice(0, -1) + '96'
       });
-      newUser.save(function(err, result){
+      user.save(function(err, result) {
         next(err, result);
       });
     }
-  ], function(err, result) {
-      if (err) {
-        res.end(err);
-      } else {
-        var userSession = {
-          openid: result.openid
-        };
-        req.session.user = userSession;
-        res.redirect(config.get('WX_OAUTH_REDIRECT_URL'));
-      }
+  ],
+  function(err, result) {
+    console.log('/create user', err, result);
+    if (err) {
+      res.send(err);
+    } else {
+      var userSession = {
+        openid: result.openid
+      };
+      req.session.user = userSession;
+      res.redirect(config.get('WX_OAUTH_REDIRECT_URL'));
+    }
   });
 });
 
@@ -95,7 +97,7 @@ router.get('/get', function(req, res) {
           ret: 1,
           url: '/users/create?access_token=' + result.data.access_token + '&openid=' + result.data.openid
         });
-      };
+      }
     ],
     function(err, result){
       console.log('get code error', err, result);
