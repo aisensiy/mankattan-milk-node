@@ -42,14 +42,16 @@ router.get('/create', function(req, res) {
           openid: result.openid
         };
         req.session.user = userSession;
-        res.redirect('/game.html');
+        res.redirect(config.get('WX_OAUTH_REDIRECT_URL'));
       }
   });
 });
 
+// if there is openid in session then get user directly
+// else redirect to create user with token and openid
 router.get('/get', function(req, res) {
-  var code = req.query.code;
   var user = req.session.user;
+  var code = req.query.code;
   var openid = user ? user.openid : '';
 
   // no code and no openid means no auth
@@ -57,8 +59,9 @@ router.get('/get', function(req, res) {
     res.json({ ret: 0, msg: 'no auth' });
   }
 
-  // if get openid from session
+  // if get openid from session then fetch user
   if (openid) {
+    console.log('/get access openid');
     async.waterfall([
       function(next) {
         User.findOne({ openid: openid }).exec(function(err, user) {
@@ -71,7 +74,7 @@ router.get('/get', function(req, res) {
       }
     ],
     function(err, result){
-      //console.log('##user', err, result);
+      console.log('error in get openid from session', err, result);
       if (err) {
         return res.json({ ret: 1, msg: err });
       } else {
@@ -88,32 +91,21 @@ router.get('/get', function(req, res) {
         client.getAccessToken(code, next);
       },
       function(result, next) {
-        User.findOne({ openid: result.data.openid }).exec(function(err, user) {
-          if (user) {
-            next(null, { ret: 0, user: user } );
-          } else {
-            next(null, {
-              ret: 1,
-              url: '/users/create?access_token=' + result.data.access_token + '&openid=' + result.data.openid
-            });
-          }
+        next(null, {
+          ret: 1,
+          url: '/users/create?access_token=' + result.data.access_token + '&openid=' + result.data.openid
         });
-      }
+      };
     ],
     function(err, result){
-      //console.log('##user', err, result);
+      console.log('get code error', err, result);
       if (err) {
         return res.json({ ret: 1 });
       } else {
-        var userSession = {
-          openid: openid
-        };
-        req.session.user = userSession;
         return res.json(result);
       }
     });
   }
-
 });
 
 module.exports = router;

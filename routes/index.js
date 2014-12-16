@@ -10,8 +10,14 @@ var client = new OAuth(
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.redirect(client.getAuthorizeURL(
-      config.get('WX_OAUTH_REDIRECT_URL'), 'STATE', 'snsapi_userinfo'));
+  var user = req.session.user;
+  var openid = user ? user.openid : '';
+  if (!openid) {
+    res.redirect(client.getAuthorizeURL(
+        config.get('WX_OAUTH_REDIRECT_URL'), 'STATE', 'snsapi_userinfo'));
+  } else {
+    res.redirect(config.get('WX_OAUTH_REDIRECT_URL'));
+  }
 });
 
 module.exports = router;
