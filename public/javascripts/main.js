@@ -15,7 +15,7 @@ $(function() {
   var user = null;
   $.ajax('/users/get?code=' + code, function(result) {
     if (result.ret == 1) {
-      window.location.href = result.msg.url;
+      window.location.href = window.location.origin + result.msg.url;
     } else {
       user = result.user;
       alert(user);
