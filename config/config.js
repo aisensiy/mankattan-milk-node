@@ -17,3 +17,5 @@ nconf.add('custom', {
 });
 
 nconf.load();
+
+module.exports = nconf;

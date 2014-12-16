@@ -1,8 +1,22 @@
 namespace :deploy do
-  desc 'Commands for forever control'
-  %w(stop restart start).each do |cmd|
-    task cmd.to_sym, roles(:app) do
-      run "cd #{fetch(:deploy_to)}/current/ && node_modules/.bin/forever start bin/www"
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "cd #{fetch(:deploy_to)}/current/ && PORT=#{fetch(:app_port)} node_modules/.bin/forever restart bin/www"
+    end
+  end
+
+  desc 'Start application'
+  task :start do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "cd #{fetch(:deploy_to)}/current/ && PORT=#{fetch(:app_port)} node_modules/.bin/forever start bin/www"
+    end
+  end
+
+  desc 'Stop application'
+  task :stop do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "cd #{fetch(:deploy_to)}/current/ && PORT=#{fetch(:app_port)} node_modules/.bin/forever stop bin/www"
     end
   end
 end

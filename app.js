@@ -5,6 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// connect mongodb
+require('./db/db_connect.js');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var wx = require('./routes/weixin');
