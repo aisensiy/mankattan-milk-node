@@ -43,7 +43,7 @@ router.get('/create', function(req, res) {
           openid: result.openid
         };
         req.session.user = userSession; // auto save
-        res.redirect(config.get('WX_OAUTH_REDIRECT_URL'));
+        res.redirect('/game.html');
       }
   });
 });
@@ -66,9 +66,7 @@ router.get('/get', function(req, res) {
           if (user) {
             next(null, { ret: 0, user: user } );
           } else {
-            next(null, { ret: 1, msg: {
-              'url': '/users/create?access_token=' + result.data.access_token + '&openid=' + result.data.openid
-            }});
+            next('no user find in db');
           }
         });
       }
@@ -76,7 +74,7 @@ router.get('/get', function(req, res) {
     function(err, result){
       //console.log('##user', err, result);
       if (err) {
-        return res.json({ ret: 1 });
+        return res.json({ ret: 1, msg: err });
       } else {
         // 设置session
         var userSession = {
