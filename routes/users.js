@@ -50,7 +50,7 @@ router.get('/create', function(req, res) {
 
 router.get('/get', function(req, res) {
   var code = req.query.code;
-  var user = req.sessionn.user;
+  var user = req.session.user;
   var openid = user ? user.openid : '';
 
   // no code and no openid means no auth
