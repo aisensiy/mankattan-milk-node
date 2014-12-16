@@ -26,6 +26,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: config.get('COOKIE_SECRET'),
+  store: new MongoStore({
+    host: config.get('DB_HOST'),
+    db: config.get('DB_NAME'),
+    port: config.get('DB_PORT')
+  }),
+  cookie: { maxAge: config.get('COOKIE_MAX_AGE') },
+  resave: false,
+  saveUninitialized :false
+}));
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/wx', wx);
