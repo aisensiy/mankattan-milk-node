@@ -18,7 +18,7 @@ $(function() {
       window.location.href = window.location.origin + result.msg.url;
     } else {
       user = result.user;
-      alert(user);
+      $('body').html(user.nickname);
     }
   });
 });
