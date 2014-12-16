@@ -13,16 +13,14 @@ var client = new OAuth(
 var User = require('../db/models/user');
 
 router.get('/create', function(req, res) {
-  var code = req.param.code;
+  var access_token = req.query.access_token;
+  var openid = req.query.openid;
 
   async.waterfall([
     function(next) {
-      client.getAccessToken(code, next);
-    },
-    function(result, next) {
       client.getUser({
-        access_token: result.data.access_token,
-        openid: result.data.openid,
+        access_token: access_token,
+        openid: openid,
         lang: 'zh-CN'
       }, next);
     },
@@ -37,7 +35,7 @@ router.get('/create', function(req, res) {
       });
     }
   ], function(err, result) {
-      if(err) {
+      if (err) {
         res.end(err);
       } else {
         // 设置session
@@ -45,39 +43,81 @@ router.get('/create', function(req, res) {
           openid: result.openid
         };
         req.session.user = userSession; // auto save
-        res.redirect('/');
+        res.redirect(config.get('WX_OAUTH_REDIRECT_URL'));
       }
   });
 });
 
 router.get('/get', function(req, res) {
-  if (!req.session.user) {
-    res.redirect(client.getAuthorizeURL(
-        ['http://', config.get('DOMAIN'), '/users/create'], 'STATE', 'snsapi_userinfo'))
-  }
-  var user = req.session.user;
-  var openid = user.openid;
+  var code = req.query.code;
+  var user = req.sessionn.user;
+  var openid = user ? user.openid : '';
 
-  async.waterfall([
-    function(next) {
-      User.findOne({ openid: openid }).exec(function(err, user) {
-        next(null, { ret: 0, user: user } );
-      });
-    }
-  ],
-  function(err, result){
-    //console.log('##user', err, result);
-    if (err) {
-      return res.json({ ret: 1 });
-    } else {
-      // 设置session
-      var userSession = {
-        openid: openid
-      };
-      req.session.user = userSession; // auto save
-      return res.json(result);
-    }
-  });
+  // no code and no openid means no auth
+  if (!code && !openid) {
+    res.json({ ret: 0, msg: 'no auth' });
+  }
+
+  // if get openid from session
+  if (openid) {
+    async.waterfall([
+      function(next) {
+        User.findOne({ openid: openid }).exec(function(err, user) {
+          if (user) {
+            next(null, { ret: 0, user: user } );
+          } else {
+            next(null, { ret: 1, msg: {
+              'url': '/users/create?access_token=' + result.data.access_token + '&openid=' + result.data.openid
+            }});
+          }
+        });
+      }
+    ],
+    function(err, result){
+      //console.log('##user', err, result);
+      if (err) {
+        return res.json({ ret: 1 });
+      } else {
+        // 设置session
+        var userSession = {
+          openid: openid
+        };
+        req.session.user = userSession; // auto save
+        return res.json(result);
+      }
+    });
+  } else { // or get code
+    async.waterfall([
+      function(next) {
+        client.getAccessToken(code, next);
+      },
+      function(result, next) {
+        User.findOne({ openid: result.data.openid }).exec(function(err, user) {
+          if (user) {
+            next(null, { ret: 0, user: user } );
+          } else {
+            next(null, { ret: 1, msg: {
+              'url': '/users/create?access_token=' + result.data.access_token + '&openid=' + result.data.openid
+            }});
+          }
+        });
+      }
+    ],
+    function(err, result){
+      //console.log('##user', err, result);
+      if (err) {
+        return res.json({ ret: 1 });
+      } else {
+        // 设置session
+        var userSession = {
+          openid: openid
+        };
+        req.session.user = userSession; // auto save
+        return res.json(result);
+      }
+    });
+  }
+
 });
 
 module.exports = router;

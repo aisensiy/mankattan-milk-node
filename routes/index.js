@@ -11,7 +11,7 @@ var client = new OAuth(
 /* GET home page. */
 router.get('/', function(req, res) {
   res.redirect(client.getAuthorizeURL(
-      config.get('WX_OAUTH_REDIRECT_URL'), 'STATE', 'snsapi_base'));
+      config.get('WX_OAUTH_REDIRECT_URL'), 'STATE', 'snsapi_userinfo'));
 });
 
 module.exports = router;
