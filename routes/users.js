@@ -38,11 +38,10 @@ router.get('/create', function(req, res) {
       if (err) {
         res.end(err);
       } else {
-        // 设置session
         var userSession = {
           openid: result.openid
         };
-        req.session.user = userSession; // auto save
+        req.session.user = userSession;
         res.redirect('/game.html');
       }
   });
@@ -76,11 +75,10 @@ router.get('/get', function(req, res) {
       if (err) {
         return res.json({ ret: 1, msg: err });
       } else {
-        // 设置session
         var userSession = {
           openid: openid
         };
-        req.session.user = userSession; // auto save
+        req.session.user = userSession;
         return res.json(result);
       }
     });
@@ -94,9 +92,10 @@ router.get('/get', function(req, res) {
           if (user) {
             next(null, { ret: 0, user: user } );
           } else {
-            next(null, { ret: 1, msg: {
-              'url': '/users/create?access_token=' + result.data.access_token + '&openid=' + result.data.openid
-            }});
+            next(null, {
+              ret: 1,
+              url: '/users/create?access_token=' + result.data.access_token + '&openid=' + result.data.openid
+            });
           }
         });
       }
@@ -106,11 +105,10 @@ router.get('/get', function(req, res) {
       if (err) {
         return res.json({ ret: 1 });
       } else {
-        // 设置session
         var userSession = {
           openid: openid
         };
-        req.session.user = userSession; // auto save
+        req.session.user = userSession;
         return res.json(result);
       }
     });
