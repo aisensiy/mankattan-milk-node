@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 // connect mongodb
 require('./db/db_connect.js');
+var config = require('./config/config');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -25,6 +26,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 app.use(session({
   secret: config.get('COOKIE_SECRET'),
