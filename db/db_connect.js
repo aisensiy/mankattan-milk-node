@@ -1,5 +1,5 @@
-var config = require('../config/config');
 var mongoose = require('mongoose');
+var config = require('../config/config');
 
 var connect = function () {
   mongoose.connect('mongodb://' + config.get('DB_HOST') + ':' + config.get('DB_PORT') + '/' + config.get('DB_NAME'));
