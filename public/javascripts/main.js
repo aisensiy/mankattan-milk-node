@@ -11,14 +11,14 @@ function get_code() {
 }
 
 $(function() {
-  var code = get_code();
-  var user = null;
-  $.get('/users/get?code=' + (code || ''), function(result) {
-    if (result.ret == 1 && result.url) {
-      window.location.href = window.location.origin + result.url;
-    } else if (result.user) {
-      user = result.user;
-      $('body').html(user.nickname);
-    }
-  });
+//  var code = get_code();
+//  var user = null;
+//  $.get('/users/get?code=' + (code || ''), function(result) {
+//    if (result.ret == 1 && result.url) {
+//      window.location.href = window.location.origin + result.url;
+//    } else if (result.user) {
+//      user = result.user;
+//      $('body').html(user.nickname);
+//    }
+//  });
 });
