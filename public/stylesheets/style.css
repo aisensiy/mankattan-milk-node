@@ -19,11 +19,10 @@ body {
 
 span, .click div {
     font-size: 2em;
-    font-weight: bold;
 }
 
 div.container {
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
     padding: 5% 0;
 }
@@ -47,7 +46,7 @@ header h1 {
 
 section.count {
     overflow: hidden;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 section.count > div {
@@ -57,7 +56,7 @@ section.count > div {
 section.count div div,
 section.time span.number {
     display: inline;
-    font-size: 3.2em;
+    font-size: 3em;
     color: #eaaa38;
 }
 
@@ -78,7 +77,7 @@ section.count > div.last {
 section.demo {
     overflow: hidden;
     height: 15%;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 section.demo > div,
@@ -102,7 +101,7 @@ section.demo span {
 }
 
 section.demo img {
-    width: 6em;
+    width: 4.5em;
     margin: 0 auto;
     display: block;
     vertical-align: middle;
@@ -110,15 +109,15 @@ section.demo img {
 }
 
 section.demo .click {
-    font-size: 3.2em;
+    font-size: 2.8em;
     text-align: center;
 }
 
 #cow {
-    width: 70%;
+    width: 60%;
     display: block;
     margin: 0 auto;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 #cow img {
@@ -132,12 +131,12 @@ section.time {
 }
 
 section.time span {
-    font-size: 3.2em;
+    font-size: 2.8em;
 }
 
 section.control {
     position: absolute;
-    bottom: 8%;
+    bottom: 5%;
     overflow: hidden;
     width: 90%;
 }
@@ -145,14 +144,16 @@ section.control {
 section.control button {
     border: 5px solid white;
     border-radius: 5px;
+    line-height: 1em;
 }
 
 section.control .rule,
 section.control .rank {
-    font-size: 3.2em;
+    font-size: 2.8em;
     font-weight: bold;
     color: white;
-    width: 3.2em;
+    width: 2.9em;
+    height: 2.9em;
     background: #00a7e4;
 }
 
@@ -169,10 +170,10 @@ section.control .rank {
 }
 
 section.control .game_start {
-    font-size: 3.2em;
+    font-size: 2.8em;
     font-weight: bold;
     color: white;
-    width: 8.4em;
+    width: 6em;
     height: 2.9em;
     margin: 0 auto;
     display: block;
