@@ -1,8 +1,180 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    body: 0;
 }
 
-a {
-  color: #00B7FF;
+body {
+    font: 9px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background: url('../images/top.png') no-repeat left top, url('../images/bottom.png') no-repeat left bottom;
+    background-color: #ddf2f9;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-size: 100% auto;
+    color: #1f2965;
+}
+
+span, .click div {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+div.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 5% 0;
+}
+
+header {
+    overflow: hidden;
+    margin-bottom: 8%;
+}
+
+header .logo {
+    width: 35%;
+    vertical-align: middle;
+}
+
+header h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    display: inline;
+    margin: 0;
+}
+
+section.count {
+    overflow: hidden;
+    margin-bottom: 2em;
+}
+
+section.count > div {
+    float: left;
+}
+
+section.count div div,
+section.time span.number {
+    display: inline;
+    font-size: 3.2em;
+    color: #eaaa38;
+}
+
+section.count > div {
+    width: 34%;
+    margin-right: 3%;
+    text-align: center  ;
+}
+
+section.count > div.click {
+    width: 25%;
+}
+
+section.count > div.last {
+    margin-right: 0;
+}
+
+section.demo {
+    overflow: hidden;
+    height: 15%;
+    margin-bottom: 2em;
+}
+
+section.demo > div,
+section.demo > span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+section.demo > div {
+    width: 30%;
+}
+section.demo > div.click {
+    width: 24%;
+}
+section.demo > span {
+    width: 5%;
+}
+
+section.demo span {
+    font-size: 4em;
+}
+
+section.demo img {
+    width: 6em;
+    margin: 0 auto;
+    display: block;
+    vertical-align: middle;
+    padding: 0;
+}
+
+section.demo .click {
+    font-size: 3.2em;
+    text-align: center;
+}
+
+#cow {
+    width: 70%;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 2em;
+}
+
+#cow img {
+    max-width: 100%;
+}
+
+section.time {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+section.time span {
+    font-size: 3.2em;
+}
+
+section.control {
+    position: absolute;
+    bottom: 8%;
+    overflow: hidden;
+    width: 90%;
+}
+
+section.control button {
+    border: 5px solid white;
+    border-radius: 5px;
+}
+
+section.control .rule,
+section.control .rank {
+    font-size: 3.2em;
+    font-weight: bold;
+    color: white;
+    width: 3.2em;
+    background: #00a7e4;
+}
+
+section.control .rule {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+section.control .rank {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+section.control .game_start {
+    font-size: 3.2em;
+    font-weight: bold;
+    color: white;
+    width: 8.4em;
+    height: 2.9em;
+    margin: 0 auto;
+    display: block;
+    background-color: #0069bb;
 }
