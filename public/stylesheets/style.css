@@ -227,19 +227,6 @@ and (min-width: 481px) {
     }
 }
 
-@media screen and (max-width: 480px)
-and (max-height: 610px)
-and (min-height: 480px) {
-    html, body {
-        font-size: 8px;
-    }
-    div.container {
-        width: 320px;
-        position: relative;
-        height: 95%;
-    }
-}
-
 /* desktop */
 @media screen and (min-width: 769px) {
     html, body {
