@@ -10,6 +10,32 @@ function get_code() {
   return result['code'];
 }
 
+function start_countdown() {
+    var $number_elem = $('.number');
+    var $elem = $('.game_start').on('click', function() {
+        if ($elem.data('started')) {
+            return;
+        }
+        $elem.data('started', true);
+        $number_elem.html(15);
+        var start_time = new Date();
+        var interval_key = setInterval(function() {
+            var cur_time = new Date();
+            var diff = cur_time - start_time;
+            var left = 15000 - diff;
+            console.log(left);
+            if (left <= 0) {
+                left = 0;
+            }
+            $number_elem.text(parseInt(left / 100) / 10);
+            if (left == 0) {
+                clearInterval(interval_key);
+                $elem.data('started', false);
+            }
+        }, 50);
+    });
+}
+
 $(function() {
 //  var code = get_code();
 //  var user = null;
@@ -28,4 +54,6 @@ $(function() {
         console.log('new height', height);
     });
     $(window).resize();
+
+    start_countdown();
 });
