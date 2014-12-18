@@ -16,7 +16,7 @@ namespace :deploy do
   desc 'Stop application'
   task :stop do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "cd #{fetch(:deploy_to)}/current/ && PORT=#{fetch(:app_port)} node_modules/.bin/forever stop bin/www"
+      execute "cd #{fetch(:deploy_to)}/current/ && PORT=#{fetch(:app_port)} node_modules/.bin/forever stopall"
     end
   end
 end
