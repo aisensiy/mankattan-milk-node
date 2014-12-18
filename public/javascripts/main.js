@@ -21,4 +21,11 @@ $(function() {
 //      $('body').html(user.nickname);
 //    }
 //  });
+    $(window).on('resize', function() {
+        var width = $(window).width();
+        var height = 1.1 * width;
+        $('div.container').css('min-height', height);
+        console.log('new height', height);
+    });
+    $(window).resize();
 });

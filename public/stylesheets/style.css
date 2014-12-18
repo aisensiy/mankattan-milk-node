@@ -231,8 +231,6 @@ and (min-width: 481px) {
         height: auto;
     }
     div.container {
-        width: 320px;
-        min-height: 480px;
         position: relative;
     }
 }
@@ -244,8 +242,6 @@ and (min-width: 481px) {
         font-size: 15px;
     }
     div.container {
-        width: 768px;
-        min-height: 1024px;
         position: relative;
     }
 }
