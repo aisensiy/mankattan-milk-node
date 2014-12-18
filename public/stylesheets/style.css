@@ -2,29 +2,27 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    body: 0;
 }
 
 body {
     font: 9px "Lucida Grande", Helvetica, Arial, sans-serif;
-    background: url('../images/top.png') no-repeat left top, url('../images/bottom.png') no-repeat left bottom;
-    background-color: #ddf2f9;
     height: 100%;
     width: 100%;
     padding: 0;
     margin: 0;
-    background-size: 100% auto;
     color: #1f2965;
 }
 
-span {
-    font-size: 1.5em;
-}
-
 div.container {
-    width: 95%;
+    width: 90%;
     margin: 0 auto;
-    padding: 5% 0;
+    padding: 5% 5% 0 5%;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    background: url('../images/top.png') no-repeat left top, url('../images/bottom.png') no-repeat left bottom;
+    background-color: #ddf2f9;
+    background-size: 100% auto;
 }
 
 header {
@@ -34,6 +32,12 @@ header {
 
 header .logo {
     width: 35%;
+    vertical-align: middle;
+    margin-right: 10%;
+}
+
+header .title {
+    width: 50%;
     vertical-align: middle;
 }
 
@@ -62,7 +66,7 @@ section.time span.number {
 section.time span,
 section.count div div,
 section.demo .click {
-    font-size: 2em;
+    font-size: 2.4em;
 }
 
 section.count > div {
@@ -178,4 +182,73 @@ section.control .game_start {
     margin: 0 auto;
     display: block;
     background-color: #0069bb;
+}
+
+/* media query */
+/* small device */
+@media screen
+and (max-width: 320px) {
+    body {
+        font-size: 10px;
+    }
+}
+
+/* bigger phone */
+@media screen
+and (min-width: 321px)
+and (max-width: 768px) {
+    body {
+        font-size: 10px;
+    }
+}
+
+/* landscape */
+@media screen and (max-height: 479px) {
+    html, body {
+        height: auto;
+    }
+    div.container {
+        width: 320px;
+        min-height: 500px;
+        position: relative;
+    }
+}
+
+/* bigger landscape */
+@media screen and (max-height: 768px)
+and (min-width: 481px) {
+    html, body {
+        height: auto;
+    }
+    div.container {
+        width: 480px;
+        min-height: 700px;
+        position: relative;
+    }
+}
+
+@media screen and (max-width: 480px)
+and (max-height: 610px)
+and (min-height: 480px) {
+    html, body {
+        font-size: 8px;
+    }
+    div.container {
+        width: 320px;
+        position: relative;
+        height: 95%;
+    }
+}
+
+/* desktop */
+@media screen and (min-width: 769px) {
+    html, body {
+        height: auto;
+        font-size: 15px;
+    }
+    div.container {
+        width: 768px;
+        min-height: 1024px;
+        position: relative;
+    }
 }
