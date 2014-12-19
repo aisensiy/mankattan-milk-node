@@ -12,33 +12,68 @@ function get_code() {
 
 function start_countdown() {
     var $number_elem = $('.number');
-    var $elem = $('.game_start').on('click', function() {
-        if ($elem.data('started')) {
+    var $start_btn = $('.game_start');
+    $start_btn.on('click', function() {
+        if ($start_btn.data('started')) {
             return;
         }
-        $elem.data('started', true);
+        $start_btn.data('started', true);
+
+        // count reset
+        $("#cow img").data('click', 0);
+        $(".click div").html(0);
+        $(".cup div").html(0);
+        $(".bang div").html(0);
+
+        // count_down
         $number_elem.html(15);
         var start_time = new Date();
         var interval_key = setInterval(function() {
             var cur_time = new Date();
             var diff = cur_time - start_time;
             var left = 15000 - diff;
-            console.log(left);
             if (left <= 0) {
                 left = 0;
             }
             $number_elem.text(parseInt(left / 100) / 10);
             if (left == 0) {
                 clearInterval(interval_key);
-                $elem.data('started', false);
+                $start_btn.data('started', false);
             }
         }, 50);
     });
 }
 
-function click_cow() {
+function update_click_count(click_count) {
+    var $start_btn = $('.game_start');
+    if (!$start_btn.data('started')) {
+        return;
+    }
+
+    // var click_count = $("#cow img").data('click');
+    var $click = $(".click div");
+    var $cup = $(".cup div");
+    var $bang = $(".bang div");
+
+    $click.html(click_count);
+    $cup.html(parseInt(click_count / 8));
+    $bang.html(parseInt(click_count / 8) * 12 / 10);
+}
+
+function click_cow(callback) {
     $('#cow img').click(function() {
-        console.log('click cow!');
+        var $start_btn = $('.game_start');
+        if (!$start_btn.data('started')) {
+            return;
+        }
+
+        $(this).data('click', 1 + parseInt($(this).data('click')));
+        console.log($(this).data('click'));
+
+        // update count
+        callback && callback($(this).data('click'));
+
+        // animation
         $(this).css({transform: 'scale(0.8)'});
         var self = this;
         setTimeout(function() {
@@ -66,5 +101,5 @@ $(function() {
     $(window).resize();
 
     start_countdown();
-    click_cow();
+    click_cow(update_click_count);
 });
