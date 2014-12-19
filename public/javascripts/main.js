@@ -139,6 +139,12 @@ var Popup = (function() {
     }
 })();
 
+function save_result() {
+    var click = $('#cow img').data('click');
+    $.get('/save', {click: click}, function() {
+    });
+}
+
 
 $(function() {
 //  var code = get_code();
@@ -158,6 +164,9 @@ $(function() {
 //    });
 //    $(window).resize();
 
-    start_countdown(Popup.show_cong_popup);
+    start_countdown(function() {
+        Popup.show_cong_popup();
+        save_result();
+    });
     click_cow(update_click_count);
 });
