@@ -184,6 +184,11 @@ section.control .game_start {
     background-color: #0069bb;
 }
 
+/* animation */
+#cow img {
+    transition: all 0.8s;
+}
+
 /* media query */
 /* small device */
 @media screen
@@ -228,7 +233,6 @@ and (max-width: 768px) {
 @media screen and (max-height: 768px)
 and (min-width: 481px) {
     html, body {
-        height: auto;
     }
     div.container {
         position: relative;
