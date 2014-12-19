@@ -107,11 +107,8 @@ var Popup = (function() {
         $cover.hide();
     }
 
-    $('body').on('mousedown', 'a.close', close);
-    $('body').on('touchstart', 'a.close', close);
-
-    $cover.on('mousedown', close);
-    $cover.on('touchstart', close);
+    $('body').on('mousedown touchstart', 'a.close', close);
+    $cover.on('mousedown touchstart', close);
 
     var show_cong_popup = function() {
         var text = "恭喜你！<br /> 本次共挤奶click次！获得奶棒bang根！<br /> 点击主页面 ”我的名次“ 查看排行榜吧~";
@@ -123,6 +120,17 @@ var Popup = (function() {
         $cover.show();
         $popup.show();
     };
+
+    var show_popup = function(id) {
+        return function() {
+            $('.popup').hide();
+            $cover.show();
+            $('#' + id).show();
+        }
+    };
+
+    $('button.rule').on('mousedown touchstart', show_popup('rule'));
+    $('button.rank').on('mousedown touchstart', show_popup('rank'));
 
     return {
         show_cong_popup: show_cong_popup
