@@ -61,7 +61,7 @@ function update_click_count(click_count) {
 }
 
 function click_cow(callback) {
-    $('#cow img').click(function() {
+    function handler() {
         var $start_btn = $('.game_start');
         if (!$start_btn.data('started')) {
             return;
@@ -76,10 +76,13 @@ function click_cow(callback) {
         // animation
         $(this).css({transform: 'scale(0.8)'});
         var self = this;
-        setTimeout(function() {
+        setTimeout(function () {
             $(self).css({transform: 'scale(1.0)'});
         }, 800);
-    });
+    }
+
+    // $('#cow img').click(handler);
+    $('#cow img').touchstart(handler);
 }
 
 $(function() {
