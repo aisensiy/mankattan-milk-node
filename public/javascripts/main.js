@@ -11,8 +11,9 @@ function get_code() {
 }
 
 var game_time = 15;
+var endtime;
 
-function start_countdown() {
+function start_countdown(finished) {
     var $number_elem = $('.number');
     var $start_btn = $('.game_start');
     $start_btn.on('click', function() {
@@ -45,6 +46,8 @@ function start_countdown() {
                 $start_btn.data('started', false);
                 $start_btn.attr('disabled', false);
                 $start_btn.removeClass('disable');
+                endtime = new Date();
+                finished && finished();
             }
         }, 50);
     });
@@ -96,7 +99,9 @@ var Popup = (function() {
 
     // event bind
     function close(e) {
-        console.log(123);
+        if (+new Date() - endtime <= 2000) {
+            return;
+        }
         e && e.preventDefault();
         $('.popup').hide();
         $cover.hide();
@@ -108,14 +113,19 @@ var Popup = (function() {
     $cover.on('mousedown', close);
     $cover.on('touchstart', close);
 
-    var show_popup = function(id) {
+    var show_cong_popup = function() {
+        var text = "恭喜你！<br /> 本次共挤奶click次！获得奶棒bang根！<br /> 点击主页面 ”我的名次“ 查看排行榜吧~";
+        var click = $('#cow img').data('click');
+        var $popup = $('#cong');
+        $popup.find('p').html(text.replace('click', click).replace('bang', parseInt(click / 8 * 1.2)))
+
         $('.popup').hide();
         $cover.show();
-        $('#' + id).show();
+        $popup.show();
     };
 
     return {
-        show_popup: show_popup
+        show_cong_popup: show_cong_popup
     }
 })();
 
@@ -138,6 +148,6 @@ $(function() {
 //    });
 //    $(window).resize();
 
-    start_countdown();
+    start_countdown(Popup.show_cong_popup);
     click_cow(update_click_count);
 });
