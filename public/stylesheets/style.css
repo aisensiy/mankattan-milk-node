@@ -228,6 +228,26 @@ section.control .game_start {
 }
 
 /* media query */
+
+@media screen and (max-width: 320px) {
+    body {
+        font-size: 8px;
+    }
+}
+
+@media screen and (min-width: 321px) and (max-width: 768px) {
+    body {
+        font-size: 10px;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+/* media query */
 /* small device */
 /*@media screen*/
 /*and (max-width: 320px) {*/
