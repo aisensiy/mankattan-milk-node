@@ -157,9 +157,11 @@ section.control .rule,
 section.control .rank {
     font-weight: bold;
     color: white;
-    width: 2.5em;
-    height: 2.5em;
+    width: 3em;
+    height: 3em;
     background: #00a7e4;
+    white-space: nowrap;
+    word-spacing: 0;
 }
 
 section.control .rule {
@@ -178,7 +180,7 @@ section.control .game_start {
     font-weight: bold;
     color: white;
     width: 6em;
-    height: 2.5em;
+    height: 3em;
     margin: 0 auto;
     display: block;
     background-color: #0069bb;
