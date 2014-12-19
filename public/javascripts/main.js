@@ -91,6 +91,35 @@ function click_cow(callback) {
     $('#cow img').on('mousedown touchstart', handler);
 }
 
+var Popup = (function() {
+    var $cover = $('.cover');
+
+    // event bind
+    function close(e) {
+        console.log(123);
+        e && e.preventDefault();
+        $('.popup').hide();
+        $cover.hide();
+    }
+
+    $('body').on('mousedown', 'a.close', close);
+    $('body').on('touchstart', 'a.close', close);
+
+    $cover.on('mousedown', close);
+    $cover.on('touchstart', close);
+
+    var show_popup = function(id) {
+        $('.popup').hide();
+        $cover.show();
+        $('#' + id).show();
+    };
+
+    return {
+        show_popup: show_popup
+    }
+})();
+
+
 $(function() {
 //  var code = get_code();
 //  var user = null;

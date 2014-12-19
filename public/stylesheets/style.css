@@ -229,6 +229,53 @@ section.control .game_start {
     transition: all 0.8s;
 }
 
+/* popup */
+.cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0.5;
+}
+.popup {
+    width: 70%;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    margin-left: -35%;
+    background-color: white;
+    border: 2px solid #1f2965;
+    border-radius: 5px;
+}
+
+.popup > div {
+    margin: 5% 3%;
+}
+
+.popup a.close {
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    text-decoration: none;
+    font-size: 2.2em;
+}
+
+#cong img {
+    max-width: 30%;
+    max-height: 100%;
+    vertical-align: middle;
+}
+
+#cong p {
+    display: inline-block;
+    width: 60%;
+    vertical-align: middle;
+    margin: 0;
+    font-size: 2.2em;
+}
+
 /* media query */
 @media screen and (max-width: 320px) {
     body {
