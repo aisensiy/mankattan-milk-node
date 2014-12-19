@@ -122,7 +122,9 @@ var Popup = (function() {
     };
 
     var show_popup = function(id) {
-        return function() {
+        return function(e) {
+            e && e.preventDefault();
+            e && e.stopPropagation();
             $('.popup').hide();
             $cover.show();
             $('#' + id).show();
