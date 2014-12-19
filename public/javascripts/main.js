@@ -86,7 +86,7 @@ function click_cow(callback) {
     }
 
     // $('#cow img').click(handler);
-    $('#cow img').on('touchstart', handler);
+    $('#cow img').on('mousedown touchstart', handler);
 }
 
 $(function() {
@@ -100,12 +100,12 @@ $(function() {
 //      $('body').html(user.nickname);
 //    }
 //  });
-    $(window).on('resize', function() {
-        var width = $(window).width();
-        var height = 1.2 * width;
-        $('div.container').css('min-height', height);
-    });
-    $(window).resize();
+//    $(window).on('resize', function() {
+//        var width = $(window).width();
+//        var height = 1.2 * width;
+//        $('div.container').css('min-height', height);
+//    });
+//    $(window).resize();
 
     start_countdown();
     click_cow(update_click_count);
