@@ -82,7 +82,7 @@ function click_cow(callback) {
     }
 
     // $('#cow img').click(handler);
-    $('#cow img').touchstart(handler);
+    $('#cow img').on('touchstart', handler);
 }
 
 $(function() {
