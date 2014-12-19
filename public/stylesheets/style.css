@@ -13,20 +13,7 @@ body {
     color: #1f2965;
 }
 
-/*
-header  14  14
-         3  17
-count    7  24
-         1  25
-demo    14  39
-         1  40
-cow     35  75
-         1  76
-time     7  83
-         1  84
-control 16 100
-*/
-
+/* vertical layout with percent */
 header {
     height: 14%;
     margin-bottom: 2%;
@@ -54,6 +41,7 @@ section.time {
 section.control {
     height: 18%;
 }
+/* end vertical layout */
 
 div.container {
     width: 90%;
@@ -86,10 +74,13 @@ header .title {
 
 section.count {
     overflow: hidden;
+    display: table;
+    width: 100%;
 }
 
 section.count > div {
-    float: left;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 section.count div div,
@@ -120,11 +111,13 @@ section.count > div.last {
 
 section.demo {
     overflow: hidden;
+    display: table;
+    width: 100%;
 }
 
 section.demo > div,
 section.demo > span {
-    display: inline-block;
+    display: table-cell;
     vertical-align: middle;
 }
 
@@ -170,14 +163,30 @@ section.time {
     max-width: 60%;
     margin: 0 auto;
     text-align: center;
+    display: table;
+}
+
+section.time span {
+    display: table-cell !important;
+    vertical-align: middle;
 }
 
 section.control {
     position: relative;
     overflow: hidden;
+    display: table;
+    width: 100%;
+}
+
+section.control > div {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
 }
 
 section.control button {
+    display: inline-block;
     border: 5px solid white;
     border-radius: 5px;
     line-height: 1em;
@@ -197,24 +206,17 @@ section.control .rank {
 }
 
 section.control .rule {
-    position: absolute;
-    left: 0;
-    top: 0;
+    float: left;
 }
 
 section.control .rank {
-    position: absolute;
-    right: 0;
-    top: 0;
+    float: right;
 }
-
 section.control .game_start {
     font-weight: bold;
     color: white;
     width: 6em;
     height: 3em;
-    margin: 0 auto;
-    display: block;
     background-color: #0069bb;
 }
 
@@ -228,22 +230,21 @@ section.control .game_start {
 }
 
 /* media query */
-
 @media screen and (max-width: 320px) {
     body {
         font-size: 8px;
     }
 }
 
-@media screen and (min-width: 321px) and (max-width: 768px) {
+@media screen and (min-width: 321px) and (max-width: 749px) {
     body {
-        font-size: 10px;
+        font-size: 12px;
     }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 750px) {
     body {
-        font-size: 18px;
+        font-size: 22px;
     }
 }
 
