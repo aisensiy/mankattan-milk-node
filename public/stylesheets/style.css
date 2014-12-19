@@ -250,12 +250,12 @@ section.control .game_start {
     border: 2px solid #1f2965;
     border-radius: 5px;
     display: none;
-    max-height: 60%;
-    overflow: auto;
 }
 
 .popup > div {
-    margin: 5% 3%;
+    margin: 10% 3% 3% 3%;
+    max-height: 20em;
+    overflow: auto;
 }
 
 .popup a.close {
@@ -278,6 +278,23 @@ section.control .game_start {
     vertical-align: middle;
     margin: 0;
     font-size: 2.2em;
+}
+
+#rank h1 {
+    text-align: center;
+}
+
+#rank table {
+    width: 100%;
+    text-align: center;
+}
+
+#rank .th-rank {
+    text-align: left;
+}
+
+.self {
+    color: #00a7e4 !important;
 }
 
 /* media query */
