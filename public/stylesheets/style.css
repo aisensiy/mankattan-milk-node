@@ -186,6 +186,10 @@ section.control .game_start {
     background-color: #0069bb;
 }
 
+.disable {
+    background-color: #aaa !important;
+}
+
 /* animation */
 #cow img {
     transition: all 0.8s;

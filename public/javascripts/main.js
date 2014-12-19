@@ -18,6 +18,8 @@ function start_countdown() {
             return;
         }
         $start_btn.data('started', true);
+        $start_btn.attr('disabled', true);
+        $start_btn.addClass('disable');
 
         // count reset
         $("#cow img").data('click', 0);
@@ -39,6 +41,8 @@ function start_countdown() {
             if (left == 0) {
                 clearInterval(interval_key);
                 $start_btn.data('started', false);
+                $start_btn.attr('disabled', true);
+                $start_btn.removeClass('disable');
             }
         }, 50);
     });
@@ -68,7 +72,7 @@ function click_cow(callback) {
         }
 
         $(this).data('click', 1 + parseInt($(this).data('click')));
-        console.log($(this).data('click'));
+        // console.log($(this).data('click'));
 
         // update count
         callback && callback($(this).data('click'));
