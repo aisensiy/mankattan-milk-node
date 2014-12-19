@@ -10,6 +10,8 @@ function get_code() {
   return result['code'];
 }
 
+var game_time = 15;
+
 function start_countdown() {
     var $number_elem = $('.number');
     var $start_btn = $('.game_start');
@@ -28,12 +30,12 @@ function start_countdown() {
         $(".bang div").html(0);
 
         // count_down
-        $number_elem.html(15);
+        $number_elem.html(game_time);
         var start_time = new Date();
         var interval_key = setInterval(function() {
             var cur_time = new Date();
             var diff = cur_time - start_time;
-            var left = 15000 - diff;
+            var left = game_time * 1000 - diff;
             if (left <= 0) {
                 left = 0;
             }
@@ -41,7 +43,7 @@ function start_countdown() {
             if (left == 0) {
                 clearInterval(interval_key);
                 $start_btn.data('started', false);
-                $start_btn.attr('disabled', true);
+                $start_btn.attr('disabled', false);
                 $start_btn.removeClass('disable');
             }
         }, 50);
