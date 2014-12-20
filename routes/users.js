@@ -41,7 +41,7 @@ router.get('/create', function(req, res) {
         }
       });
     },
-    function(existed, result) {
+    function(existed, result, next) {
       if (existed) {
         next(null, result);
       } else { // if not exist, create it
