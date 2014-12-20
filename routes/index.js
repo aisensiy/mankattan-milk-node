@@ -65,7 +65,7 @@ router.get('/rank', function(req, res) {
         function(result, next) {
             User.count({
                 click_count: { '$gt': result.click_count },
-                is_got_prize: { '$ne': 0 }
+                is_got_prize: 0
             }).exec(function(err, count) {
                 if (err) {
                     next('error');
@@ -76,7 +76,7 @@ router.get('/rank', function(req, res) {
         },
         function(result, count, next) {
             User.find({
-                is_got_prize: { '$ne': 0 }
+                is_got_prize: 0
             }).sort({click_count: -1}).limit(30).exec(function(err, users) {
                 if (err) {
                     next('error');
