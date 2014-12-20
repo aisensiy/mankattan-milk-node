@@ -156,17 +156,17 @@ var Popup = (function() {
             $('.popup').hide();
             $cover.show();
             $('#' + id).show();
-            console.log(123);
             callback && callback();
         }
     };
 
-    $('button.rule').on('mousedown touchstart', show_popup('rule'));
-    $('button.rank').on('mousedown touchstart', show_popup('rank', fetch_rank));
+    var bind_action = function($elem, id, callback) {
+        $elem.on('mousedown touchstart', show_popup(id, callback));
+    };
 
     return {
         show_cong_popup: show_cong_popup,
-        show_popup: show_popup
+        bind_action: bind_action
     }
 })();
 
@@ -194,5 +194,9 @@ $(function() {
         save_result();
     });
     click_cow(update_click_count);
+
+    Popup.bind_action($('button.rule'), 'rule');
+    Popup.bind_action($('button.rank'), 'rank', fetch_rank);
+//    $('button.rank').on('mousedown touchstart', show_popup('rank', fetch_rank));
 //    $('button.rank').on('mousedown, touchstart', Popup.show_popup('rank'));
 });
