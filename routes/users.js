@@ -13,10 +13,17 @@ var client = new OAuth(
 var User = require('../db/models/user');
 
 router.get('/create', function(req, res) {
+  var openid = req.session.user && req.session.user.openid || '';
+  if (openid) {
+    res.redirect(config.get('WX_OAUTH_REDIRECT_URL'));
+    return;
+  }
+
   var access_token = req.query.access_token;
   var openid = req.query.openid;
 
   async.waterfall([
+    // get user info
     function(next) {
       client.getUser({
         access_token: access_token,
@@ -24,22 +31,36 @@ router.get('/create', function(req, res) {
         lang: 'zh-CN'
       }, next);
     },
-    function(result, resp, next){
-      var user = new User({
-        openid: result.openid,
-        nickname: result.nickname,
-        avatar: result.headimgurl && result.headimgurl.slice(0, -1) + '96'
+    // fetch user
+    function(result, resp, next) {
+      User.findOne({ openid: openid }, function(err, user) {
+        if (user) {
+          next(null, true, user);
+        } else {
+          next(null, false, result);
+        }
       });
-      user.save(function(err, result) {
-        next(err, result);
-      });
+    },
+    function(existed, result) {
+      if (existed) {
+        next(null, result);
+      } else { // if not exist, create it
+        var user = new User({
+          openid: result.openid,
+          nickname: result.nickname,
+          avatar: result.headimgurl && result.headimgurl.slice(0, -1) + '96'
+        });
+        user.save(function(err, result) {
+          next(err, result);
+        });
+      }
     }
   ],
   function(err, result) {
-    console.log('/create user', err, result);
     if (err) {
-      res.send(err);
+      res.json({'msg': err});
     } else {
+      // create session
       var userSession = {
         openid: result.openid
       };
