@@ -308,6 +308,11 @@ section.control .game_start {
     text-align: left;
 }
 
+#rank .nickname {
+    max-width: 40%;
+    overflow: hidden;
+}
+
 .self {
     color: #00a7e4 !important;
 }
