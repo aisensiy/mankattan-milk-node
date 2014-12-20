@@ -90,9 +90,12 @@ section.time span.number {
 }
 
 section.time span,
-section.count div div,
+section.count div div {
+    font-size: 2em;
+}
+
 section.demo .click {
-    font-size: 2.4em;
+    font-size: 1.5em;
 }
 
 section.count > div {
@@ -190,7 +193,7 @@ section.control button {
     border: 5px solid white;
     border-radius: 5px;
     line-height: 1em;
-    font-size: 2.5em;
+    font-size: 2em;
     padding: 0em;
 }
 
@@ -198,8 +201,8 @@ section.control .rule,
 section.control .rank {
     font-weight: bold;
     color: white;
-    width: 3em;
-    height: 3em;
+    width: 2.7em;
+    height: 2.7em;
     background: #00a7e4;
     white-space: nowrap;
     word-spacing: 0;
@@ -215,8 +218,8 @@ section.control .rank {
 section.control .game_start {
     font-weight: bold;
     color: white;
-    width: 6em;
-    height: 3em;
+    width: 5em;
+    height: 2.7em;
     background-color: #0069bb;
 }
 
@@ -263,7 +266,7 @@ section.control .game_start {
     top: 3%;
     right: 3%;
     text-decoration: none;
-    font-size: 2.2em;
+    font-size: 1.5em;
 }
 
 #cong img {
@@ -277,11 +280,23 @@ section.control .game_start {
     width: 60%;
     vertical-align: middle;
     margin: 0;
-    font-size: 2.2em;
+    font-size: 1.5em;
+}
+
+#rule div {
+    font-size: 1.2em;
 }
 
 #rank h1 {
     text-align: center;
+}
+
+#rank h1 {
+    font-size: 1.5em;
+}
+
+#rank table {
+    font-size: 1.2em;
 }
 
 #rank table {
@@ -300,13 +315,13 @@ section.control .game_start {
 /* media query */
 @media screen and (max-width: 320px) {
     body {
-        font-size: 8px;
+        font-size: 12px;
     }
 }
 
 @media screen and (min-width: 321px) and (max-width: 749px) {
     body {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
 
