@@ -29,7 +29,7 @@ router.get('/', function(req, res) {
 
 router.get('/save', function(req, res) {
     var user = req.session.user;
-    var openid = '11';
+    var openid = user && user.openid || '';
     var click_count = +(req.query.click || 0);
     if (!openid) {
         res.status(401).send({'msg': 'no user'});
@@ -51,8 +51,7 @@ router.get('/save', function(req, res) {
 
 router.get('/rank', function(req, res) {
     var user = req.session.user;
-    var openid = '11';
-
+    var openid = user && user.openid || '';
     async.waterfall([
         function(next) {
             User.findOne({ openid: openid }).exec(function(err, user) {

@@ -172,16 +172,17 @@ var Popup = (function() {
 
 
 $(function() {
-//  var code = get_code();
-//  var user = null;
-//  $.get('/users/get?code=' + (code || ''), function(result) {
-//    if (result.ret == 1 && result.url) {
-//      window.location.href = window.location.origin + result.url;
-//    } else if (result.user) {
-//      user = result.user;
-//      $('body').html(user.nickname);
-//    }
-//  });
+    // 判断用户是否已经授权
+    var code = get_code();
+    var user = null;
+    $.get('/users/get?code=' + (code || ''), function(result) {
+        if (result.ret == 1 && result.url) {
+            window.location.href = window.location.origin + result.url;
+        } else if (result.user) {
+            user = result.user;
+        }
+    });
+
 //    $(window).on('resize', function() {
 //        var width = $(window).width();
 //        var height = 1.2 * width;
@@ -193,10 +194,9 @@ $(function() {
         Popup.show_cong_popup();
         save_result();
     });
+
     click_cow(update_click_count);
 
     Popup.bind_action($('button.rule'), 'rule');
     Popup.bind_action($('button.rank'), 'rank', fetch_rank);
-//    $('button.rank').on('mousedown touchstart', show_popup('rank', fetch_rank));
-//    $('button.rank').on('mousedown, touchstart', Popup.show_popup('rank'));
 });

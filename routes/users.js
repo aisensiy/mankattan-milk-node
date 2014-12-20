@@ -59,6 +59,7 @@ router.get('/get', function(req, res) {
   // no code and no openid means no auth
   if (!code && !openid) {
     res.json({ ret: 1, url: '/' });
+    return;
   }
 
   // if get openid from session then fetch user
