@@ -103,8 +103,7 @@ function save_result() {
 
 function fetch_rank() {
     function _build(row) {
-        var result = '';
-        return '<td>' + row.join('</td><td>') + '</td>';
+        return '<td>' + row[0] + '</td><td class="nickname">' + row[1] + '</td><td>' + row[2] + '</td><td>' + row[3] + '</td>';
     }
 
     $.get('/rank', function(rows) {

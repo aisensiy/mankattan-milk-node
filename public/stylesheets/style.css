@@ -309,7 +309,7 @@ section.control .game_start {
 }
 
 #rank .nickname {
-    max-width: 40%;
+    max-width: 6em;
     overflow: hidden;
 }
 
