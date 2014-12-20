@@ -9,6 +9,11 @@ var client = new OAuth(
     config.get('WEIXIN_APP_SECRET'));
 
 var User = require('../db/models/user');
+var async = require('async');
+
+function click_to_bang(num) {
+    return parseInt(parseInt(num / 8) * 1.2);
+}
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -42,6 +47,65 @@ router.get('/save', function(req, res) {
             });
         });
     }
+});
+
+router.get('/rank', function(req, res) {
+    var user = req.session.user;
+    var openid = '11';
+
+    async.waterfall([
+        function(next) {
+            User.findOne({ openid: openid }).exec(function(err, user) {
+                if (!user) {
+                    next('error');
+                } else {
+                    next(null, user);
+                }
+            });
+        },
+        function(result, next) {
+            User.count({
+                click_count: { '$gt': result.click_count },
+                is_got_prize: { '$ne': 0 }
+            }).exec(function(err, count) {
+                if (err) {
+                    next('error');
+                } else {
+                    next(null, result, count);
+                }
+            })
+        },
+        function(result, count, next) {
+            User.find({
+                is_got_prize: { '$ne': 0 }
+            }).sort({click_count: -1}).limit(30).exec(function(err, users) {
+                if (err) {
+                    next('error');
+                } else {
+                    next(null, result, count, users);
+                }
+            });
+        }
+    ], function(err, user, count, users) {
+        if (err) {
+            res.status(500).json({msg: err});
+        } else {
+            var i;
+            var result = [[count + 1, user.nickname, user.click_count, click_to_bang(user.click_count)]];
+            for (i = 0; i < users.length; i++) {
+                if (users[i].openid == user.openid) {
+                    continue;
+                }
+                result.push([
+                    i + 1,
+                    users[i].nickname,
+                    users[i].click_count,
+                    click_to_bang(users[i].click_count)
+                ]);
+            }
+            res.json(result);
+        }
+    });
 });
 
 module.exports = router;

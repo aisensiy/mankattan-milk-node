@@ -94,6 +94,34 @@ function click_cow(callback) {
     $('#cow img').on('mousedown touchstart', handler);
 }
 
+
+function save_result() {
+    var click = $('#cow img').data('click');
+    $.get('/save', { click: click }, function() {
+    });
+}
+
+function fetch_rank() {
+    function _build(row) {
+        var result = '';
+        return '<td>' + row.join('</td><td>') + '</td>';
+    }
+
+    $.get('/rank', function(rows) {
+        var i;
+        var $tbody = $('#rank table tbody');
+        $tbody.empty();
+        var result = '';
+        var self = rows[0];
+        result += '<tr class="self">' + _build(self) + '</tr>';
+        rows = rows.slice(1);
+        for (i = 0; i < rows.length; i++) {
+            result += '<tr>' + _build(rows[i]) + '</tr>';
+        }
+        $tbody.html(result);
+    });
+}
+
 var Popup = (function() {
     var $cover = $('.cover');
 
@@ -121,29 +149,26 @@ var Popup = (function() {
         $popup.show();
     };
 
-    var show_popup = function(id) {
+    var show_popup = function(id, callback) {
         return function(e) {
             e && e.preventDefault();
             e && e.stopPropagation();
             $('.popup').hide();
             $cover.show();
             $('#' + id).show();
+            console.log(123);
+            callback && callback();
         }
     };
 
     $('button.rule').on('mousedown touchstart', show_popup('rule'));
-    $('button.rank').on('mousedown touchstart', show_popup('rank'));
+    $('button.rank').on('mousedown touchstart', show_popup('rank', fetch_rank));
 
     return {
-        show_cong_popup: show_cong_popup
+        show_cong_popup: show_cong_popup,
+        show_popup: show_popup
     }
 })();
-
-function save_result() {
-    var click = $('#cow img').data('click');
-    $.get('/save', {click: click}, function() {
-    });
-}
 
 
 $(function() {
@@ -169,4 +194,5 @@ $(function() {
         save_result();
     });
     click_cow(update_click_count);
+//    $('button.rank').on('mousedown, touchstart', Popup.show_popup('rank'));
 });
