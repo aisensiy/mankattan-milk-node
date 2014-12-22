@@ -3,7 +3,7 @@ WeixinApi.ready(function(Api) {
 
   // 微信分享的数据
   var wxData = {
-    "appId": "wx4b0b98ac54fa2012", // 服务号可以填写appId
+    "appId": constants.app_id, // 服务号可以填写appId
     "imgUrl" : 'http://milkgame.aisensiy.com/images/niu-small.png',
     "link" : 'http://milkgame.aisensiy.com',
     "desc" : '参与曼可顿挤奶手挑战，赢取新品美味————超级奶棒，上不封顶，手速越快赢越多哦！',
