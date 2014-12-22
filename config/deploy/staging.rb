@@ -24,6 +24,7 @@ set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 
 set :server_name, 'milkgame.aisensiy.com'
 set :port, 1000
+set :url_prefix, '/milk'
 
 # files which need to be symlinked to other parts of the
 # filesystem. For example nginx virtualhosts, log rotation

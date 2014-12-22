@@ -4,8 +4,8 @@ WeixinApi.ready(function(Api) {
   // 微信分享的数据
   var wxData = {
     "appId": constants.app_id, // 服务号可以填写appId
-    "imgUrl" : 'http://milkgame.aisensiy.com/images/niu-small.png',
-    "link" : 'http://milkgame.aisensiy.com',
+    "imgUrl" : 'http://milkgame.aisensiy.com' + constants.base + '/images/niu-small.png',
+    "link" : 'http://milkgame.aisensiy.com' + constants.base,
     "desc" : '参与曼可顿挤奶手挑战，赢取新品美味————超级奶棒，上不封顶，手速越快赢越多哦！',
     "title" : "曼可顿超级挤奶手等你来战！"
   };
