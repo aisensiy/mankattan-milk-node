@@ -15,7 +15,7 @@
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'mankattan.mathartworld.com', user: 'kupai', roles: %w{web app db}, port: 1000, primary: true
+server 'mankattan.mathartworld.com', user: 'kupai', roles: %w{web app db}, port: 22, primary: true
 
 set :deploy_to, '/home/kupai/mankattan-milk-node'
 
@@ -23,7 +23,7 @@ set :stage, :production
 set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 
 set :server_name, 'mankattan.mathartworld.com'
-set :port, 1000
+set :port, 22
 
 # files which need to be symlinked to other parts of the
 # filesystem. For example nginx virtualhosts, log rotation
