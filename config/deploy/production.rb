@@ -25,6 +25,9 @@ set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 set :server_name, 'mankattan.mathartworld.com'
 set :port, 22
 
+# set :use_todo, true
+set :pty, true
+
 # files which need to be symlinked to other parts of the
 # filesystem. For example nginx virtualhosts, log rotation
 # init scripts etc. The full_app_name variable isn't
