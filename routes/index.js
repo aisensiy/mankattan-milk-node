@@ -107,4 +107,24 @@ router.get('/rank', function(req, res) {
     });
 });
 
+router.get('/score', function(req, res) {
+  var q = +req.query.q;
+  var date = config.get('finish_dates')[q - 1];
+  User.find({
+    is_got_prize: 0,
+    updated_at: {
+      '$lte': date
+    }
+  }).sort({click_count: -1}).limit(30).exec(function(err, users) {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      var i;
+      res.json(users.map(function(user, idx) {
+        return [idx + 1, user._id, user.nickname, user.avatar, user.click_count];
+      }));
+    }
+  });
+});
+
 module.exports = router;
