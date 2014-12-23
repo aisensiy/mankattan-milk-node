@@ -5,7 +5,7 @@ var Moment = require('moment');
 
 
 router.get('/stat_result', function(req, res) {
-  Statistic.select('date hour uv pv share').find(function(err, results) {
+  Statistic.find({}, 'date hour uv pv share', function(err, results) {
     res.json(results);
   });
 });
