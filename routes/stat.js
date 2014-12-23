@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Statistic = require('../db/Statistic');
+var Statistic = require('../db/models/Statistic');
 var Moment = require('moment');
 
 
@@ -86,3 +86,5 @@ router.get('/update_uv_pv', function (req, res) {
     res.sendStatus(200);
   }
 });
+
+module.exports = router;
