@@ -109,7 +109,7 @@ router.get('/rank', function(req, res) {
 
 router.get('/score', function(req, res) {
   var q = +req.query.q;
-  var date = config.get('finish_dates')[q - 1];
+  var date = new Date(config.get('finish_dates')[q - 1]);
   User.find({
     is_got_prize: 0,
     updated_at: {
