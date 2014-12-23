@@ -55,7 +55,7 @@ namespace :deploy do
 
   before 'deploy:start', 'npm:npm_install'
   before 'deploy:restart', 'npm:npm_install'
-  # before 'deploy:started', 'deploy:stop'
+  before 'deploy:started', 'deploy:stop'
   after 'deploy:finished', 'deploy:start'
 
   # desc 'Restart application'

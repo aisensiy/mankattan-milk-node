@@ -1,4 +1,4 @@
-var Statistic = require('db/models/statistic');
+var Statistic = require('db/models/Statistic');
 var Moment = require('moment');
 
 function uv_pv_stat(req, res) {
