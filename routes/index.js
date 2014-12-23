@@ -10,6 +10,7 @@ var client = new OAuth(
 
 var User = require('../db/models/user');
 var async = require('async');
+var Moment = require('moment');
 
 function click_to_bang(num) {
     return parseInt(parseInt(num / 8) * 1.2);
@@ -109,7 +110,7 @@ router.get('/rank', function(req, res) {
 
 router.get('/score', function(req, res) {
   var q = +req.query.q;
-  var date = new Date(config.get('finish_dates')[q - 1]);
+  var date = Moment(config.get('finish_dates')[q - 1], 'YYYYMMDDHH')._d;
   User.find({
     is_got_prize: 0,
     updated_at: {
