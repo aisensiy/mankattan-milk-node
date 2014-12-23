@@ -30,6 +30,7 @@ WeixinApi.ready(function(Api) {
     // 分享成功
     confirm : function(resp) {
       // 分享成功了，我们是不是可以做一些分享统计呢？
+      $.get(constants.base + '/stat/update_share', function() {});
     },
     // 整个分享过程结束
     all : function(resp,shareTo) {

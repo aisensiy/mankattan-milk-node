@@ -199,6 +199,9 @@
 
     Popup.bind_action($('button.rule'), 'rule');
     Popup.bind_action($('button.rank'), 'rank', fetch_rank);
+
+    // statistic
+    $.get(constants.base + '/stat/update_uv_pv', function() {});
   });
 
 })();
