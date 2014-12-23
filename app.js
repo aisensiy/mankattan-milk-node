@@ -12,6 +12,7 @@ var config = require('./config/config');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var wx = require('./routes/weixin');
+var stat = require('./routes/stat');
 
 var app = express();
 
