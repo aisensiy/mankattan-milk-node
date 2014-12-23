@@ -10,13 +10,14 @@ var client = new OAuth(
 
 var User = require('../db/models/user');
 var async = require('async');
+var uv_pv_stat = require('../stat_func');
 
 function click_to_bang(num) {
     return parseInt(parseInt(num / 8) * 1.2);
 }
 
 /* GET home page. */
-router.get('/', function(req, res) {
+router.get('/', uv_pv_stat, function(req, res) {
     var user = req.session.user;
     var openid = user ? user.openid : '';
     if (!openid) {
