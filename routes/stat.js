@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Statistic = require('../db/models/statistic');
+var Statistic = require('../db/models/Statistic');
 var Moment = require('moment');
 
 
