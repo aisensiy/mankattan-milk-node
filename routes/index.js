@@ -121,7 +121,7 @@ router.get('/score', function(req, res) {
       res.status(500).json(err);
     } else {
       var i;
-      res.json(users.map(function(user, idx) {
+      res.jsonp(users.map(function(user, idx) {
         return [idx + 1, user._id, user.nickname, user.avatar, user.click_count];
       }));
     }

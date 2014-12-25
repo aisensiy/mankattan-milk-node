@@ -6,7 +6,7 @@ var Moment = require('moment');
 
 router.get('/stat_result', function(req, res) {
   Statistic.find({}, 'date hour uv pv share', function(err, results) {
-    res.json(results.map(function(elem, index) {
+    res.jsonp(results.map(function(elem, index) {
       return [elem.date, elem.hour, elem.pv, elem.uv, elem.share];
     }));
   });
