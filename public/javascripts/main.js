@@ -128,56 +128,55 @@
     });
   }
 
-  var Popup = (function() {
-    var $cover = $('.cover');
+  $(function() {
+    var Popup = (function() {
+      var $cover = $('.cover');
 
-    // event bind
-    function close(e) {
-      if (+new Date() - endtime <= 2000) {
-        return;
-      }
-      e && e.preventDefault();
-      $('.popup').hide();
-      $cover.hide();
-    }
-
-    $('body').on('mousedown touchstart', 'a.close', close);
-    $cover.on('mousedown touchstart', close);
-
-    var show_cong_popup = function() {
-      var text = "恭喜你！<br /> 本次共挤奶click次！获得奶棒bang根！<br /> 点击主页面 ”我的名次“ 查看排行榜吧~";
-      var click = $('#cow img').data('click');
-      var $popup = $('#cong');
-      $popup.find('p').html(text.replace('click', click).replace('bang', parseInt(parseInt(click / 8) * 1.2)))
-
-      $('.popup').hide();
-      $cover.show();
-      $popup.show();
-    };
-
-    var show_popup = function(id, callback) {
-      return function(e) {
+      // event bind
+      function close(e) {
+        if (+new Date() - endtime <= 2000) {
+          return;
+        }
         e && e.preventDefault();
-        e && e.stopPropagation();
+        $('.popup').hide();
+        $cover.hide();
+      }
+
+      $('body').on('mousedown touchstart', 'a.close', close);
+      $cover.on('mousedown touchstart', close);
+
+      var show_cong_popup = function() {
+        var text = "恭喜你！<br /> 本次共挤奶click次！获得奶棒bang根！<br /> 点击主页面 ”我的名次“ 查看排行榜吧~";
+        var click = $('#cow img').data('click');
+        var $popup = $('#cong');
+        $popup.find('p').html(text.replace('click', click).replace('bang', parseInt(parseInt(click / 8) * 1.2)))
+
         $('.popup').hide();
         $cover.show();
-        $('#' + id).show();
-        callback && callback();
+        $popup.show();
+      };
+
+      var show_popup = function(id, callback) {
+        return function(e) {
+          e && e.preventDefault();
+          e && e.stopPropagation();
+          $('.popup').hide();
+          $cover.show();
+          $('#' + id).show();
+          callback && callback();
+        }
+      };
+
+      var bind_action = function($elem, id, callback) {
+        $elem.on('mousedown touchstart', show_popup(id, callback));
+      };
+
+      return {
+        show_cong_popup: show_cong_popup,
+        bind_action: bind_action
       }
-    };
+    })();
 
-    var bind_action = function($elem, id, callback) {
-      $elem.on('mousedown touchstart', show_popup(id, callback));
-    };
-
-    return {
-      show_cong_popup: show_cong_popup,
-      bind_action: bind_action
-    }
-  })();
-
-
-  $(function() {
     $number_elem = $('.number');
     $start_btn = $('.game_start');
     // 判断用户是否已经授权
