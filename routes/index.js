@@ -53,6 +53,11 @@ router.get('/save', function(req, res) {
 router.get('/rank', function(req, res) {
     var user = req.session.user;
     var openid = user && user.openid || '';
+    if (!openid) {
+      res.status(401).send({'msg': 'no user'});
+      return;
+    }
+
     async.waterfall([
         function(next) {
             User.findOne({ openid: openid }).exec(function(err, user) {

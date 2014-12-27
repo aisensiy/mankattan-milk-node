@@ -107,7 +107,7 @@
       return '<td>' + row[0] + '</td><td class="nickname">' + row[1] + '</td><td>' + row[2] + '</td><td>' + row[3] + '</td>';
     }
 
-    $.get(constants.base + '/rank', function(rows) {
+    $.get(constants.base + '/rank', { ts: +new Date() }, function(rows) {
       var i;
       var $tbody = $('#rank table tbody');
       $tbody.empty();
