@@ -15,6 +15,8 @@
   var endtime;
   var interval_key;
   var start_time;
+  var $number_elem = $('.number');
+  var $start_btn = $('.game_start');
 
   function countdown($number_elem, $start_btn, finished) {
     var cur_time = new Date();
@@ -35,8 +37,6 @@
   }
 
   function start_countdown(finished) {
-    var $number_elem = $('.number');
-    var $start_btn = $('.game_start');
     $start_btn.on('click', function() {
       if ($start_btn.data('started')) {
         return;
@@ -196,12 +196,17 @@
 //    });
 //    $(window).resize();
 
-    start_countdown(function() {
+    var finish_callback = function() {
       Popup.show_cong_popup();
       save_result();
-    });
+    };
 
-    click_cow(update_click_count);
+    start_countdown(finish_callback);
+
+    click_cow(function(click_count) {
+      update_click_count(click_count);
+      countdown($number_elem, $start_btn, finish_callback);
+    });
 
     Popup.bind_action($('button.rule'), 'rule');
     Popup.bind_action($('button.rank'), 'rank', fetch_rank);
