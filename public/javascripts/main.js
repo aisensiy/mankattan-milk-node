@@ -13,6 +13,26 @@
 
   var game_time = 15;
   var endtime;
+  var interval_key;
+  var start_time;
+
+  function countdown($number_elem, $start_btn, finished) {
+    var cur_time = new Date();
+    var diff = cur_time - start_time;
+    var left = game_time * 1000 - diff;
+    if (left <= 0) {
+      left = 0;
+    }
+    $number_elem.text(parseInt(left / 100) / 10);
+    if (left == 0) {
+      clearInterval(interval_key);
+      $start_btn.data('started', false);
+      $start_btn.attr('disabled', false);
+      $start_btn.removeClass('disable');
+      endtime = new Date();
+      finished && finished();
+    }
+  }
 
   function start_countdown(finished) {
     var $number_elem = $('.number');
@@ -33,23 +53,9 @@
 
       // count_down
       $number_elem.html(game_time);
-      var start_time = new Date();
-      var interval_key = setInterval(function() {
-        var cur_time = new Date();
-        var diff = cur_time - start_time;
-        var left = game_time * 1000 - diff;
-        if (left <= 0) {
-          left = 0;
-        }
-        $number_elem.text(parseInt(left / 100) / 10);
-        if (left == 0) {
-          clearInterval(interval_key);
-          $start_btn.data('started', false);
-          $start_btn.attr('disabled', false);
-          $start_btn.removeClass('disable');
-          endtime = new Date();
-          finished && finished();
-        }
+      start_time = new Date();
+      interval_key = setInterval(function() {
+        countdown($number_elem, $start_btn, finished);
       }, 50);
     });
   }
