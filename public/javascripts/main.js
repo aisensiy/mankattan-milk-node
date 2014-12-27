@@ -142,7 +142,7 @@
       var text = "恭喜你！<br /> 本次共挤奶click次！获得奶棒bang根！<br /> 点击主页面 ”我的名次“ 查看排行榜吧~";
       var click = $('#cow img').data('click');
       var $popup = $('#cong');
-      $popup.find('p').html(text.replace('click', click).replace('bang', parseInt(click / 8 * 1.2)))
+      $popup.find('p').html(text.replace('click', click).replace('bang', parseInt(parseInt(click / 8) * 1.2)))
 
       $('.popup').hide();
       $cover.show();
