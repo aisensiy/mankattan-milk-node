@@ -15,8 +15,8 @@
   var endtime;
   var interval_key;
   var start_time;
-  var $number_elem = $('.number');
-  var $start_btn = $('.game_start');
+  var $number_elem;
+  var $start_btn;
 
   function countdown($number_elem, $start_btn, finished) {
     var cur_time = new Date();
@@ -178,6 +178,8 @@
 
 
   $(function() {
+    $number_elem = $('.number');
+    $start_btn = $('.game_start');
     // 判断用户是否已经授权
     var code = get_code();
     var user = null;
