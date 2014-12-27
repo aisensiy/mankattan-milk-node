@@ -85,7 +85,6 @@ router.get('/get', function(req, res) {
 
   // if get openid from session then fetch user
   if (openid) {
-    console.log('/get access openid');
     async.waterfall([
       function(next) {
         User.findOne({ openid: openid }).exec(function(err, user) {
@@ -98,8 +97,8 @@ router.get('/get', function(req, res) {
       }
     ],
     function(err, result){
-      console.log('error in get openid from session', err, result);
       if (err) {
+        console.log('error in get openid from session', err, result);
         return res.json({ ret: 1, msg: err });
       } else {
         var userSession = {
@@ -122,8 +121,8 @@ router.get('/get', function(req, res) {
       }
     ],
     function(err, result){
-      console.log('get code error', err, result);
       if (err) {
+        console.log('get code error', err, result);
         return res.json({ ret: 1 });
       } else {
         return res.json(result);
