@@ -18,6 +18,9 @@
   var $number_elem;
   var $start_btn;
 
+  var min_click_interval = 17; // misec
+  var last_click_ts = +new Date();
+
   function countdown($number_elem, $start_btn, finished) {
     var cur_time = new Date();
     var diff = cur_time - start_time;
@@ -81,6 +84,13 @@
       var $start_btn = $('.game_start');
       if (!$start_btn.data('started')) {
         return;
+      }
+
+      // skip if less than min click interval from last click
+      if (+new Date() - last_click_ts < min_click_interval) {
+        return;
+      } else {
+        last_click_ts = +new Date();
       }
 
       $(this).data('click', 1 + parseInt($(this).data('click')));
