@@ -13,11 +13,11 @@ var client = new OAuth(
 var User = require('../db/models/user');
 
 router.get('/create', function(req, res) {
-  var openid = req.session.user && req.session.user.openid || '';
-  if (openid) {
-    res.redirect(config.get('WX_OAUTH_REDIRECT_URL'));
-    return;
-  }
+  // var openid = req.session.user && req.session.user.openid || '';
+  // if (openid) {
+  //   res.redirect(config.get('WX_OAUTH_REDIRECT_URL'));
+  //   return;
+  // }
 
   var access_token = req.query.access_token;
   var openid = req.query.openid;
@@ -84,7 +84,7 @@ router.get('/get', function(req, res) {
   }
 
   // if get openid from session then fetch user
-  if (openid) {
+  if (openid && !code) {
     async.waterfall([
       function(next) {
         User.findOne({ openid: openid }).exec(function(err, user) {
