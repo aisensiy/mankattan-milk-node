@@ -2,21 +2,21 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "cd #{fetch(:deploy_to)}/current/ && NODE_ENV=#{fetch(:stage)} PORT=#{fetch(:app_port)} node_modules/.bin/forever restart bin/www"
+      execute "cd #{fetch(:deploy_to)}/current/ && NODE_ENV=#{fetch(:stage)} PORT=#{fetch(:app_port)} node_modules/.bin/forever restart bin/www; true"
     end
   end
 
   desc 'Start application'
   task :start do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "cd #{fetch(:deploy_to)}/current/ && NODE_ENV=#{fetch(:stage)} PORT=#{fetch(:app_port)} node_modules/.bin/forever start bin/www"
+      execute "cd #{fetch(:deploy_to)}/current/ && NODE_ENV=#{fetch(:stage)} PORT=#{fetch(:app_port)} node_modules/.bin/forever start bin/www; true"
     end
   end
 
   desc 'Stop application'
   task :stop do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "cd #{fetch(:deploy_to)}/current/ && NODE_ENV=#{fetch(:stage)} PORT=#{fetch(:app_port)} node_modules/.bin/forever stopall"
+      execute "cd #{fetch(:deploy_to)}/current/ && NODE_ENV=#{fetch(:stage)} PORT=#{fetch(:app_port)} node_modules/.bin/forever stopall; true"
     end
   end
 end
