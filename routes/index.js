@@ -9,6 +9,7 @@ var client = new OAuth(
     config.get('WEIXIN_APP_SECRET'));
 
 var User = require('../db/models/user');
+var Season1 = require('../db/models/season1');
 var async = require('async');
 var Moment = require('moment');
 
@@ -115,8 +116,18 @@ router.get('/rank', function(req, res) {
 
 router.get('/score', function(req, res) {
   var q = +req.query.q;
-  var date = Moment(config.get('finish_dates')[q - 1], 'YYYYMMDDHH')._d;
-  User.find({
+  var date1 = Moment(config.get('finish_dates')[0], 'YYYYMMDDHH')._d;
+  var date2 = Moment(config.get('finish_dates')[1], 'YYYYMMDDHH')._d;
+  var Target;
+  var date;
+  if (q == 1) {
+    Target = Season1;
+    date = date1;
+  } else if (q == 2) {
+    Target = User;
+    date = date2;
+  }
+  Target.find({
     is_got_prize: 0,
     updated_at: {
       '$lte': date
