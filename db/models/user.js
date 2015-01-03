@@ -11,6 +11,7 @@ var UserSchema = new Schema({
   avatar: String,
 
   click_count: { type: Number, default: 0 },
+  clicks: { type: Array, default: [] },
   game_count: { type: Number, default: 0 },
   is_got_prize: { type: Number, default: 0 },
 

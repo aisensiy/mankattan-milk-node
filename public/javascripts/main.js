@@ -17,6 +17,7 @@
   var start_time;
   var $number_elem;
   var $start_btn;
+  var clicks = [];
 
   var min_click_interval = 17; // misec
   var last_click_ts = +new Date();
@@ -25,6 +26,7 @@
     var cur_time = new Date();
     var diff = cur_time - start_time;
     var left = game_time * 1000 - diff;
+    clicks = [];
     if (left <= 0) {
       left = 0;
     }
@@ -80,17 +82,20 @@
   }
 
   function click_cow(callback) {
-    function handler() {
+    function handler(event) {
       var $start_btn = $('.game_start');
       if (!$start_btn.data('started')) {
         return;
       }
 
       // skip if less than min click interval from last click
-      if (+new Date() - last_click_ts < min_click_interval) {
+      var now = +new Date();
+      var diff_with_last_click = now - last_click_ts;
+      if (diff_with_last_click < min_click_interval) {
         return;
       } else {
         last_click_ts = +new Date();
+        clicks.push([event.pageX, event.pageY, diff_with_last_click]);
       }
 
       $(this).data('click', 1 + parseInt($(this).data('click')));
@@ -114,7 +119,16 @@
 
   function save_result() {
     var click = $('#cow img').data('click');
-    $.get(constants.base + '/save', { click: click }, function() {
+    // $.get(constants.base + '/save', { click: click }, function() {
+    // });
+    $.ajax({
+      type: 'post',
+      data: JSON.stringify({
+        click: click,
+        clicks: clicks
+      }),
+      contentType: 'application/json',
+      url: constants.base + '/save'
     });
   }
 
