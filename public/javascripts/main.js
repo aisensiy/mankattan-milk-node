@@ -26,7 +26,6 @@
     var cur_time = new Date();
     var diff = cur_time - start_time;
     var left = game_time * 1000 - diff;
-    clicks = [];
     if (left <= 0) {
       left = 0;
     }
@@ -55,6 +54,7 @@
       $(".click div").html(0);
       $(".cup div").html(0);
       $(".bang div").html(0);
+      clicks = [];
 
       // count_down
       $number_elem.html(game_time);
