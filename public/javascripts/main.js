@@ -95,7 +95,11 @@
         return;
       } else {
         last_click_ts = +new Date();
-        clicks.push([event.pageX, event.pageY, diff_with_last_click]);
+        clicks.push([
+            event.originalEvent.touches[0].pageX,
+            event.originalEvent.touches[0].pageY,
+            diff_with_last_click
+        ]);
       }
 
       $(this).data('click', 1 + parseInt($(this).data('click')));
@@ -113,7 +117,7 @@
     }
 
     // $('#cow img').click(handler);
-    $('#cow img').on('mousedown touchstart', handler);
+    $('#cow img').on('touchstart', handler);
   }
 
 
