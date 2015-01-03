@@ -95,9 +95,10 @@
         return;
       } else {
         last_click_ts = +new Date();
+        var touch = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
         clicks.push([
-            event.originalEvent.touches[0].pageX,
-            event.originalEvent.touches[0].pageY,
+            touch.pageX,
+            touch.pageY,
             diff_with_last_click
         ]);
       }
