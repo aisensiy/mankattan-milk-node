@@ -13,6 +13,7 @@ var UserSchema = new Schema({
   click_count: { type: Number, default: 0 },
   game_count: { type: Number, default: 0 },
   is_got_prize: { type: Number, default: 0 },
+  is_cheat: { type: Number, default: 0 },
 
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
