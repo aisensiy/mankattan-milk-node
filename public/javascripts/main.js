@@ -21,7 +21,7 @@
   var has_mouse = 0;
 
 
-  var min_click_interval = 17; // misec
+  var min_click_interval = 24; // misec
   var last_click_ts = +new Date();
 
   function countdown($number_elem, $start_btn, finished) {
