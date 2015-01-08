@@ -15,6 +15,8 @@ var UserSchema = new Schema({
   game_count: { type: Number, default: 0 },
   is_got_prize: { type: Number, default: 0 },
   is_cheat: { type: Number, default: 0 },
+  has_mouse: { type: Number, default: 0 },
+  user_agent: String,
 
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }

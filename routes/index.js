@@ -35,6 +35,8 @@ router.post('/save', function(req, res) {
     // var click_count = +(req.query.click || 0);
     var click_count = +(req.body.click || 0);
     var clicks = req.body.clicks || [];
+    var has_mouse = req.body.has_mouse || 0;
+    var user_agent = req.body.user_agent || 0;
 
     if (!openid) {
         res.status(401).send({'msg': 'no user'});
@@ -50,6 +52,8 @@ router.post('/save', function(req, res) {
                 user.clicks = clicks;
                 user.updated_at = new Date();
             }
+            user.has_mouse = has_mouse;
+            user.user_agent = user_agent;
             user.save(function() {
                 res.send({'msg': 'success'});
             });

@@ -18,6 +18,8 @@
   var $number_elem;
   var $start_btn;
   var clicks = [];
+  var has_mouse = 0;
+
 
   var min_click_interval = 17; // misec
   var last_click_ts = +new Date();
@@ -130,7 +132,9 @@
       type: 'post',
       data: JSON.stringify({
         click: click,
-        clicks: clicks
+        clicks: clicks,
+        has_mouse: has_mouse,
+        user_agent: window.navigator.userAgent
       }),
       contentType: 'application/json',
       url: constants.base + '/save'
@@ -240,6 +244,8 @@
 
     Popup.bind_action($('button.rule'), 'rule');
     Popup.bind_action($('button.rank'), 'rank', fetch_rank);
+
+    $(document).on('mousemove mousedown mouseup', function() { has_mouse = 1; });
 
     // statistic
     $.get(constants.base + '/stat/update_uv_pv', function() {});
