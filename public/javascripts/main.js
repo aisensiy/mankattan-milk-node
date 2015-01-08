@@ -245,7 +245,7 @@
     Popup.bind_action($('button.rule'), 'rule');
     Popup.bind_action($('button.rank'), 'rank', fetch_rank);
 
-    $(document).on('mousemove mousedown mouseup', function() { has_mouse = 1; });
+    $(document).on('mousemove', function() { has_mouse = 1; });
 
     // statistic
     $.get(constants.base + '/stat/update_uv_pv', function() {});
